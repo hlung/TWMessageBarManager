@@ -586,7 +586,12 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 
 - (CGRect)statusBarFrame
 {
-    return [self orientFrame:[UIApplication sharedApplication].statusBarFrame];
+    if ([UIApplication sharedApplication].isStatusBarHidden) {
+        return CGRectMake(0, 0, [UIApplication sharedApplication].keyWindow.frame.size.width, 0);
+    }
+    else {
+        return [self orientFrame:[UIApplication sharedApplication].statusBarFrame];
+    }
 }
 
 #pragma mark - Helpers
